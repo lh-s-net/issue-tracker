@@ -12,6 +12,7 @@ import {createIssueSchema} from "@/app/validationSchemas"
 import {z} from "zod"
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
+import delay from "delay";
 
 // interface IssueForm {
 //     title: string
@@ -19,7 +20,7 @@ import Spinner from "@/app/components/Spinner";
 // }
 type IssueForm = z.infer<typeof createIssueSchema>
 
-const NewIssuePage = () => {
+const NewIssuePage = async () => {
     const router = useRouter();
     const {register, control, handleSubmit, formState: {errors}} = useForm<IssueForm>({
         resolver: zodResolver(createIssueSchema)
@@ -37,6 +38,8 @@ const NewIssuePage = () => {
             setError("An unexpected error occurred.")
         }
     })
+
+    await delay(200)
 
     return (
         <div className="max-w-xl">
