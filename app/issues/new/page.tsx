@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useState} from 'react';
-import SimpleMDE from "react-simplemde-editor";
+import dynamic from "next/dynamic";
 import "easymde/dist/easymde.min.css";
 import {Controller, useForm} from "react-hook-form";
 import axios from "axios";
@@ -12,7 +12,12 @@ import {createIssueSchema} from "@/app/validationSchemas"
 import {z} from "zod"
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
-import delay from "delay";
+// import SimpleMDE from "react-simplemde-editor";
+
+const SimpleMDE = dynamic(
+    () => import("react-simplemde-editor"),
+    {ssr: false}
+)
 
 // interface IssueForm {
 //     title: string
@@ -20,7 +25,7 @@ import delay from "delay";
 // }
 type IssueForm = z.infer<typeof createIssueSchema>
 
-const NewIssuePage = async () => {
+const NewIssuePage = () => {
     const router = useRouter();
     const {register, control, handleSubmit, formState: {errors}} = useForm<IssueForm>({
         resolver: zodResolver(createIssueSchema)
@@ -38,8 +43,6 @@ const NewIssuePage = async () => {
             setError("An unexpected error occurred.")
         }
     })
-
-    await delay(200)
 
     return (
         <div className="max-w-xl">
