@@ -1,10 +1,12 @@
 import React from 'react';
 import prisma from "@/prisma/client";
 import {notFound} from "next/navigation";
-import {Box, Grid} from "@radix-ui/themes";
+import {Box, Button, Grid} from "@radix-ui/themes";
 import delay from "delay";
 import EditIssueButton from "@/app/issues/[id]/EditIssueButton";
 import IssueDetails from "@/app/issues/[id]/IssueDetails";
+import Link from "next/link";
+import {Pencil2Icon} from "@radix-ui/react-icons";
 
 interface Props {
     params: { id: string }
@@ -31,6 +33,17 @@ const IssueDetailPage = async ({params}: Props) => {
             </Box>
             <Box>
                 <EditIssueButton issueId={issue.id}/>
+
+                {/*myDetail*/}
+                <div className="pt-5">
+                    <Button>
+                        <Link href={`/issues/${issue.id}/mydetail`} className="flex items-center">
+                            <Pencil2Icon className="mr-2"/>
+                            myDetail Issue
+                        </Link>
+                    </Button>
+                </div>
+
             </Box>
         </Grid>
     );
