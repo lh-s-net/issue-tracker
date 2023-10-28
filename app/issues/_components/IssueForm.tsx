@@ -26,13 +26,9 @@ const SimpleMDE = dynamic(
 // }
 type IssueFormData = z.infer<typeof createIssueSchema>
 
-interface Props {
-    issue?: Issue
-}
-
-const IssueForm = ({issue}: {issue?: Issue}) => {
+const IssueForm = ({issue}: { issue?: Issue }) => {
     const router = useRouter();
-    const {register, control, handleSubmit, formState: {errors}} = useForm<IssueForm>({
+    const {register, control, handleSubmit, formState: {errors}} = useForm<IssueFormData>({
         resolver: zodResolver(createIssueSchema)
     })
     const [error, setError] = useState("")
@@ -58,7 +54,8 @@ const IssueForm = ({issue}: {issue?: Issue}) => {
                 className="max-w-xl space-y-3"
                 onSubmit={onSubmit}>
                 <TextField.Root>
-                    <TextField.Input defaultValue={issue?.title} placeholder="Title" {...register("title")}></TextField.Input>
+                    <TextField.Input defaultValue={issue?.title}
+                                     placeholder="Title" {...register("title")}></TextField.Input>
                 </TextField.Root>
                 <ErrorMessage>{errors.title?.message}</ErrorMessage>
                 <Controller
