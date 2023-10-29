@@ -1,7 +1,6 @@
 "use client"
 
 import React, {useState} from 'react';
-import dynamic from "next/dynamic";
 import "easymde/dist/easymde.min.css";
 import {Controller, useForm} from "react-hook-form";
 import axios from "axios";
