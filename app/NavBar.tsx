@@ -54,6 +54,7 @@ const NavLinks = () => {
     )
 }
 
+
 const AuthStatus = () => {
     const {status, data: session} = useSession()
 
