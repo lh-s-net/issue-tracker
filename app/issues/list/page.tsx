@@ -1,11 +1,8 @@
 import React from 'react';
-import {Flex, Table} from "@radix-ui/themes";
-import {IssueStatusBadge, Link} from "@/app/components"
+import {Flex} from "@radix-ui/themes";
 import prisma from "@/prisma/client";
 import IssueActions from "@/app/issues/list/IssueActions";
-import {Issue, Status} from "@prisma/client";
-import NextLink from "next/link";
-import {ArrowUpIcon} from "@radix-ui/react-icons";
+import {Status} from "@prisma/client";
 import Pagination from "@/app/components/Pagination";
 import IssueTable, {columnNames, IssueQuery} from "@/app/issues/list/IssueTable";
 
